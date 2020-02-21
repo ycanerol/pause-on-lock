@@ -89,13 +89,13 @@ dbus-monitor --session "type='signal',$DBUS_LOCK" | \
 (
   # variable to check, whether we paused on lock
   PAUSED_PLAYER="none"
-  # D-Bus objects, methods, etc. we need to controll Rhythmbox
+  # D-Bus objects, methods, etc. we need to control players
   RHYTHMBOX="org.mpris.MediaPlayer2.rhythmbox"
   SPOTIFY="org.mpris.MediaPlayer2.spotify"
   MEDIAPLAYER="/org/mpris/MediaPlayer2"
   GET_PROPERTIES="org.freedesktop.DBus.Properties.Get"
   PLAYER="org.mpris.MediaPlayer2.Player"
-  
+
   while true; do
     read -r X
     # pause on lock
@@ -113,7 +113,7 @@ dbus-monitor --session "type='signal',$DBUS_LOCK" | \
             PAUSED_PLAYER=$player
           fi
         done
-      # without playerctl  
+      # without playerctl
       else
         if  dbus-send --print-reply --dest="$RHYTHMBOX" "$MEDIAPLAYER" \
           "$GET_PROPERTIES" string:$PLAYER string:'PlaybackStatus' | \
